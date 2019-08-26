@@ -1,14 +1,38 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// Angular Material components
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatSidenavModule } from '@angular/material/sidenav'; 
+
 import { AppComponent } from './app.component';
+import { GroupComponent } from './group/group.component';
+import { GroupListComponent } from './group-list/group-list.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
+import { ItemComponent } from './item/item.component';
+import { ItemListComponent } from './item-list/item-list.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { MainPanelComponent } from './main-panel/main-panel.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TopBarComponent,
+    GroupComponent,
+    GroupListComponent,
+    ItemComponent,
+    ItemListComponent,
+    SidebarComponent,
+    MainPanelComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserAnimationsModule,
+    BrowserModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]

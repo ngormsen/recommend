@@ -1,0 +1,13 @@
+<h3>Gruppen:</h3>
+<div>
+    <ul *ngFor = "let group of groups" class="m-0">
+        <button 
+            mat-flat-button
+            class="btn-primary"
+            (click)="onSelectGroup(group)"
+            [class.selected]="group === selectedGroup">
+                {{ group.getName() }}
+        </button>
+    </ul>
+</div>
+
