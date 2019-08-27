@@ -4,4 +4,10 @@
 
 .item-container {
     max-width: 850px;
+    border-radius: 20px;
+}
+
+.fill-remaining-vertical-space {
+    display: flex;
+    flex: 1;
 }

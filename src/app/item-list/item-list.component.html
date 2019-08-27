@@ -1,3 +1,7 @@
-<h3>Item List:</h3>
+<div class="container">
+    <app-item 
+        *ngFor="let item of itemList" 
+        [item]="item">
+    </app-item>
+</div>
 
-<app-item *ngFor="let item of itemList" [item]="item"></app-item>
