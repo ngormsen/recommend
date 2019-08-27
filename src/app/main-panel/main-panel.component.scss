@@ -1,0 +1,7 @@
+// Maybe create additional .scss file for variables such as $primaryColor
+// Otherwise one has to import styles.css
+@import "src/styles.scss"; 
+
+::ng-deep .mat-ink-bar {
+    background-color: $primary !important;
+}

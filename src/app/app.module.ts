@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar'; 
 import { MatSidenavModule } from '@angular/material/sidenav'; 
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 // Third party components
 import { NgxFloatButtonModule } from 'ngx-float-button'; // source: https://github.com/GustavoCostaW/ngc-float-button
@@ -29,7 +30,7 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
     ItemComponent,
     ItemListComponent,
     SidebarComponent,
-    MainPanelComponent,
+    MainPanelComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -37,7 +38,8 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
     MatButtonModule,
     MatToolbarModule,
     MatSidenavModule,
-    NgxFloatButtonModule
+    NgxFloatButtonModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
