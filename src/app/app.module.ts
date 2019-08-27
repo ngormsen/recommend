@@ -8,8 +8,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav'; 
 
 // Third party components
-import { NgxFloatButtonModule } from 'ngx-float-button';
+import { NgxFloatButtonModule } from 'ngx-float-button'; // source: https://github.com/GustavoCostaW/ngc-float-button
 
+// Local components
 import { AppComponent } from './app.component';
 import { GroupComponent } from './group/group.component';
 import { GroupListComponent } from './group-list/group-list.component';

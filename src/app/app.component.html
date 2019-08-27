@@ -1,22 +1,24 @@
+<div class="app-container" style="height: 100vh;">
+  <app-top-bar></app-top-bar>
+  
+  <mat-drawer-container class="example-container">
+    <!-- Sidebar Panel -->
+    <mat-drawer mode="side" opened class="sidebar">
+      <app-group-list></app-group-list>
+    </mat-drawer>
 
-<div style="height: 100vh;">
-    <app-top-bar></app-top-bar>
-    
-    <mat-drawer-container class="example-container">
-      <mat-drawer mode="side" opened class="sidebar">
-        <app-group-list></app-group-list>
-      </mat-drawer>
-      <mat-drawer-content class="bg-light">
-        <app-main-panel></app-main-panel>
+    <!-- Main Panel -->
+    <mat-drawer-content class="bg-light">
+      <app-main-panel></app-main-panel>
 
-        <!-- Floating Button analogous to Google Docs -->
-        <ngx-float-button icon="add">
-          <ngx-float-item-button icon="person_add" content="float item 1"></ngx-float-item-button>
-          <ngx-float-item-button icon="gps_fixed" content="float item 2"></ngx-float-item-button>
-          <ngx-float-item-button icon="mode_edit" content="float item 3"></ngx-float-item-button>
-        </ngx-float-button>
+      <!-- Floating Button analogous to Google Docs -->
+      <ngx-float-button icon="add">
+        <ngx-float-item-button icon="person_add" content="float item 1"></ngx-float-item-button>
+        <ngx-float-item-button icon="gps_fixed" content="float item 2"></ngx-float-item-button>
+        <ngx-float-item-button icon="mode_edit" content="float item 3"></ngx-float-item-button>
+      </ngx-float-button>
+    </mat-drawer-content>
 
-      </mat-drawer-content>
-    </mat-drawer-container>
+  </mat-drawer-container>
 </div>
     
