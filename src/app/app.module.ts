@@ -7,6 +7,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar'; 
 import { MatSidenavModule } from '@angular/material/sidenav'; 
 
+// Third party components
+import { NgxFloatButtonModule } from 'ngx-float-button';
+
 import { AppComponent } from './app.component';
 import { GroupComponent } from './group/group.component';
 import { GroupListComponent } from './group-list/group-list.component';
@@ -32,7 +35,8 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
     BrowserModule,
     MatButtonModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    NgxFloatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
