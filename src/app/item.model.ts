@@ -1,7 +1,8 @@
 export class Item{
     constructor(
         private _title: string,
-        private _imageUrl: string = "") {
+        private _imageUrl: string = "",
+        private _userDescription: string = "") {
 
     };
 
@@ -9,11 +10,11 @@ export class Item{
         return this._title;
     }
 
-    setImageUrl() {
-        
+    getImageUrl() {
+        return this._imageUrl
     }
 
-    getImgUrl() {
-        return this._imageUrl
+    getUserDescription() {
+        return this._userDescription
     }
 };

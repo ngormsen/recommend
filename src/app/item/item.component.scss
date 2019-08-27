@@ -1,5 +1,7 @@
-.img {
-    width: 150px;
-    height:200px;
-    background-color: lightblue;
+.img-thumbnail {
+    max-width: 150px;
+}
+
+.item-container {
+    max-width: 850px;
 }
