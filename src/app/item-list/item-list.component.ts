@@ -10,10 +10,9 @@ import { Group } from '../group.model';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit {
-  itemList: Item[];
+  @Input() selectedGroup: Group;
 
-  constructor(private groupService: GroupService) {
-    this.groupService.changeSelectedGroup$.subscribe(group => this.itemList = group.getItems())
+  constructor() {
   }
 
   ngOnInit() {

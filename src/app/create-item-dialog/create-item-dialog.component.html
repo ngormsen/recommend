@@ -1,0 +1,15 @@
+
+<div mat-dialog-content>
+    <p>Item title:</p>
+        <mat-form-field>
+            <input matInput [value]="value" #itemTitle placeholder="Input">
+        </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onCreateItem(itemTitle.value)">Create Item</button>
+  <button mat-button (click)="onSubmit()">Submit</button>
+  <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Abbrechen</button> -->
+</div>
+
+

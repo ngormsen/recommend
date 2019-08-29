@@ -6,7 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar'; 
 import { MatSidenavModule } from '@angular/material/sidenav'; 
-import {MatTabsModule} from '@angular/material/tabs'; 
+import { MatTabsModule } from '@angular/material/tabs'; 
+import { MatDialogModule } from '@angular/material/dialog'; 
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material';
 
 // Third party components
 import { NgxFloatButtonModule } from 'ngx-float-button'; // source: https://github.com/GustavoCostaW/ngc-float-button
@@ -20,6 +23,8 @@ import { ItemComponent } from './item/item.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MainPanelComponent } from './main-panel/main-panel.component';
+import { FloatingButtonComponent } from './floating-button/floating-button.component';
+import { CreateItemDialogComponent } from './create-item-dialog/create-item-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,9 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
     ItemComponent,
     ItemListComponent,
     SidebarComponent,
-    MainPanelComponent
+    MainPanelComponent,
+    FloatingButtonComponent,
+    CreateItemDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -39,8 +46,13 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
     MatToolbarModule,
     MatSidenavModule,
     NgxFloatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
+  entryComponents: [CreateItemDialogComponent],
+
   providers: [],
   bootstrap: [AppComponent]
 })
