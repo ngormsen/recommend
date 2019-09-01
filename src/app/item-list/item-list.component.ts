@@ -11,11 +11,14 @@ import { Group } from '../group.model';
 })
 export class ItemListComponent implements OnInit {
   @Input() currentGroup: Group;
+  @Input() currentCategory: string;
 
   constructor() {
   }
 
   ngOnInit() {
+    console.log(this.currentCategory);
+    console.log(this.currentGroup)
   }
 
 }

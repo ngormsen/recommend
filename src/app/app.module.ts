@@ -25,6 +25,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MainPanelComponent } from './main-panel/main-panel.component';
 import { FloatingButtonComponent } from './floating-button/floating-button.component';
 import { CreateItemDialogComponent } from './create-item-dialog/create-item-dialog.component';
+import { NavCategoryComponent } from './nav-category/nav-category.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CreateItemDialogComponent } from './create-item-dialog/create-item-dial
     SidebarComponent,
     MainPanelComponent,
     FloatingButtonComponent,
-    CreateItemDialogComponent
+    CreateItemDialogComponent,
+    NavCategoryComponent
   ],
   imports: [
     BrowserAnimationsModule,

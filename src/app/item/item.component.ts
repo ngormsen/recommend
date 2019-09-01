@@ -8,8 +8,11 @@ import { Item } from '../item.model';
 })
 export class ItemComponent implements OnInit {
   @Input() item: Item;
+  @Input() currentCategory: string;
 
-  constructor() { }
+  constructor() {
+
+   }
 
   ngOnInit() {
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GroupService } from '../group.service';
 import { Group } from '../group.model';
 import { Item } from '../item.model';
+import { CATEGORIES } from '../MOCKDATA';
 
 @Component({
   selector: 'app-main-panel',
@@ -10,8 +11,10 @@ import { Item } from '../item.model';
 })
 export class MainPanelComponent implements OnInit {
   currentGroup: Group;
+  categories: string[];
 
   constructor(private groupService: GroupService) {
+    this.categories = CATEGORIES;
   }
 
   ngOnInit() {

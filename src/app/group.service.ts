@@ -14,11 +14,18 @@ export class GroupService {
   groups: BehaviorSubject<Group[]> = new BehaviorSubject<Group[]>(GROUPS);
   currentGroup: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
 
+  // Action stream which accepts an item and adds it to the currentGroup
+  addItem: Subject<Item> = new Subject<Item>();
+
   constructor() {
     // Set an initial group at app start
     if (this.groups.value) {
       this.setCurrentGroup(this.groups.value[0])
     }
+
+    // configure the action stream `addItem`
+    this.addItem  
+
   }
   
   setCurrentGroup(newGroup: Group) {
@@ -26,9 +33,7 @@ export class GroupService {
   }
 
   addItemToCurrentGroup(item: Item) {
-    // Note: Since currentGroup is a BehaviorSubject, we 
-    // can access its last emitted value (a group). We then use this 
-    // value to call the group's `addItem()` function.
+    console.log("Adding item to current group:", item)
     this.currentGroup.value.addItem(item);
   }
 }
