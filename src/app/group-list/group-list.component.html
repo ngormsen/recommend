@@ -4,8 +4,8 @@
         <li *ngFor="let group of groups">
             <button 
                     class="btn btn-link text-primary"
-                    (click)="onSelectGroup(group)"
-                    [class.selected]="group === selectedGroup">
+                    (click)="onSetCurrentGroup(group)"
+                    [class.selected]="group === currentGroup">
                     {{ group.getName() }}
             </button>
         </li>

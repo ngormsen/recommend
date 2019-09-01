@@ -8,13 +8,17 @@ import { Group } from '../group.model';
   styleUrls: ['./main-panel.component.scss']
 })
 export class MainPanelComponent implements OnInit {
-  selectedGroup: Group;
+  currentGroup: Group;
 
   constructor(private groupService: GroupService) {
-    this.groupService.changeSelectedGroup$.subscribe(group => this.selectedGroup = group)
   }
 
   ngOnInit() {
+    // Subscribe to the current group, such that the currentGroup
+    // attribute gets updated each time the value changes in the service.
+    this.groupService.currentGroup.subscribe((newGroup) => {
+      this.currentGroup = newGroup;
+    })
   }
 
 }

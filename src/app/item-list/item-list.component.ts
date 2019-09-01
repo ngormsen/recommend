@@ -10,7 +10,7 @@ import { Group } from '../group.model';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit {
-  @Input() selectedGroup: Group;
+  @Input() currentGroup: Group;
 
   constructor() {
   }
