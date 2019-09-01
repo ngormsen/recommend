@@ -1,5 +1,8 @@
 <h1>currentGroup = {{ currentGroup.getName() }}</h1>
 
+<!-- A button that adds items to currentGroup, for testing purposes -->
+<button (click)="onAddItemToCurrentGroup()">Test Add Item</button>
+
 <!-- Item category navigation -->
 <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
     <mat-tab label="Alles"></mat-tab>
@@ -9,4 +12,6 @@
 </mat-tab-group>
 
 <app-item-list [currentGroup]="currentGroup"></app-item-list>
-<!-- <app-floating-button [selectedGroup]="selectedGroup"></app-floating-button> -->
+<app-floating-button></app-floating-button>
+
+

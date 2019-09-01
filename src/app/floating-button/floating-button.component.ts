@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Item } from '../item.model';
 import { CreateItemDialogComponent } from '../create-item-dialog/create-item-dialog.component';
+import { Item } from '../item.model';
 import { Group } from '../group.model';
+import { GroupService } from '../group.service';
 
 @Component({
   selector: 'app-floating-button',
@@ -10,9 +11,11 @@ import { Group } from '../group.model';
   styleUrls: ['./floating-button.component.scss']
 })
 export class FloatingButtonComponent implements OnInit {
-  @Input() selectedGroup: Group;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,
+              private groupService: GroupService) { 
+
+  }
 
   ngOnInit() {
   }
@@ -22,8 +25,9 @@ export class FloatingButtonComponent implements OnInit {
       width: '500px'
     });
 
-  dialogRef.afterClosed().subscribe(item => {
-    this.selectedGroup.addItem(item)
-  });
+    // Adding item to currentGroup works, but the form-input itself is buggy.
+    dialogRef.afterClosed().subscribe(item => {
+      this.groupService.addItemToCurrentGroup(item);
+    });
   }
 };

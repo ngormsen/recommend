@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupService } from '../group.service';
 import { Group } from '../group.model';
+import { Item } from '../item.model';
 
 @Component({
   selector: 'app-main-panel',
@@ -14,11 +15,15 @@ export class MainPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Subscribe to the current group, such that the currentGroup
+    // Subscribe to currentGroup of GroupService, such that the currentGroup
     // attribute gets updated each time the value changes in the service.
     this.groupService.currentGroup.subscribe((newGroup) => {
       this.currentGroup = newGroup;
     })
+  }
+
+  onAddItemToCurrentGroup() {
+    this.groupService.addItemToCurrentGroup(new Item("TEST ITEM"))
   }
 
 }
