@@ -1,15 +1,8 @@
-<h1>currentGroup = {{ currentGroup.getName() }}</h1>
 
-<!-- A button that adds items to currentGroup, for testing purposes -->
-<button (click)="onAddItemToCurrentGroup()">Test Add Item</button>
 
 <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
     <mat-tab *ngFor="let category of categories" label="{{category | titlecase}}" #tabLabel>
         <app-item-list [currentGroup]="currentGroup" [currentCategory]="tabLabel.textLabel"></app-item-list>
     </mat-tab>
 </mat-tab-group>
-
-
-<app-floating-button></app-floating-button>
-
 

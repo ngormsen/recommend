@@ -26,6 +26,7 @@ import { MainPanelComponent } from './main-panel/main-panel.component';
 import { FloatingButtonComponent } from './floating-button/floating-button.component';
 import { CreateItemDialogComponent } from './create-item-dialog/create-item-dialog.component';
 import { NavCategoryComponent } from './nav-category/nav-category.component';
+import { SidebarActionsComponent } from './sidebar-actions/sidebar-actions.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { NavCategoryComponent } from './nav-category/nav-category.component';
     MainPanelComponent,
     FloatingButtonComponent,
     CreateItemDialogComponent,
-    NavCategoryComponent
+    NavCategoryComponent,
+    SidebarActionsComponent
   ],
   imports: [
     BrowserAnimationsModule,
