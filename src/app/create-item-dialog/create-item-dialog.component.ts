@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Item } from '../item.model';
-import { Group } from '../group.model';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-create-item-dialog',
@@ -10,15 +9,21 @@ import { Group } from '../group.model';
 })
 export class CreateItemDialogComponent implements OnInit {
 
+  itemForm: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<CreateItemDialogComponent>) {
-
+  constructor(
+    private fb: FormBuilder, 
+    public dialogRef: MatDialogRef<CreateItemDialogComponent>) {
   }
+
   ngOnInit() {
+    this.itemForm = this.fb.group({
+      category: new FormControl(''),
+      title: new FormControl(''),
+      message: new FormControl('')
+    })
+
+    this.itemForm.valueChanges.subscribe(console.log)
   }
   
-  onCreateItem(title: string): void {
-    let newItem = new Item(title);
-  }
-
 }

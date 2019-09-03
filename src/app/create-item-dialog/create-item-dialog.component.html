@@ -1,15 +1,28 @@
+<h2 mat-dialog-title>Empfehlung erstellen</h2>
+<mat-dialog-content>
 
-<div mat-dialog-content>
-    <p>Item title:</p>
-        <mat-form-field>
-            <input matInput [value]="value" #itemTitle placeholder="Input">
-        </mat-form-field>
-</div>
+  <form [formGroup]="itemForm" class="d-flex flex-column">
+    
+    Value: {{ itemForm.value | json }}
+    
+    <hr>
 
-<div mat-dialog-actions>
-  <button mat-button (click)="onCreateItem(itemTitle.value)">Create Item</button>
-  <button mat-button (click)="onSubmit()">Submit</button>
-  <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Abbrechen</button> -->
-</div>
-
-
+    <mat-radio-group class="d-flex justify-content-around" aria-label="Select an option" formControlName="category">
+        <mat-radio-button value="book">Buch</mat-radio-button>
+        <mat-radio-button value="movie">Film</mat-radio-button>
+        <mat-radio-button value="tvshow">Serie</mat-radio-button>
+        <mat-radio-button value="other">Andere</mat-radio-button>
+    </mat-radio-group>
+    
+    <mat-form-field>
+      <input matInput placeholder="Titel" formControlName="title">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <textarea matInput placeholder="Warum empfiehlst du diesen Titel?" formControlName="message"></textarea> 
+    </mat-form-field>
+    
+  </form>
+  
+</mat-dialog-content>
+  

@@ -8,8 +8,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav'; 
 import { MatTabsModule } from '@angular/material/tabs'; 
 import { MatDialogModule } from '@angular/material/dialog'; 
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select'; 
+import {MatRadioModule} from '@angular/material/radio'; 
+
+
 
 // Third party components
 import { NgxFloatButtonModule } from 'ngx-float-button'; // source: https://github.com/GustavoCostaW/ngc-float-button
@@ -27,6 +32,8 @@ import { FloatingButtonComponent } from './floating-button/floating-button.compo
 import { CreateItemDialogComponent } from './create-item-dialog/create-item-dialog.component';
 import { NavCategoryComponent } from './nav-category/nav-category.component';
 import { SidebarActionsComponent } from './sidebar-actions/sidebar-actions.component';
+
+
 
 @NgModule({
   declarations: [
@@ -53,7 +60,10 @@ import { SidebarActionsComponent } from './sidebar-actions/sidebar-actions.compo
     MatTabsModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatRadioModule
   ],
   entryComponents: [CreateItemDialogComponent],
 
