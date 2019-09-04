@@ -10,7 +10,7 @@
     <mat-radio-group class="d-flex justify-content-around" aria-label="Select an option" formControlName="category">
         <mat-radio-button value="book">Buch</mat-radio-button>
         <mat-radio-button value="movie">Film</mat-radio-button>
-        <mat-radio-button value="tvshow">Serie</mat-radio-button>
+        <mat-radio-button value="series">Serie</mat-radio-button>
         <mat-radio-button value="other">Andere</mat-radio-button>
     </mat-radio-group>
     
@@ -19,10 +19,18 @@
     </mat-form-field>
     
     <mat-form-field>
-      <textarea matInput placeholder="Warum empfiehlst du diesen Titel?" formControlName="message"></textarea> 
+      <textarea matInput placeholder="Warum empfiehlst du diesen Titel?" formControlName="userDescription"></textarea> 
     </mat-form-field>
-    
+
   </form>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Abbrechen</button>
+    <button mat-button 
+            mat-dialog-close
+            (click)="onAddItemToCurrentGroup(itemForm.value.title, itemForm.value.category, itemForm.value.userDescription)"
+            cdkFocusInitial>Bestätigen
+    </button>
+  </div>
   
 </mat-dialog-content>
-  

@@ -1,7 +1,10 @@
+export type Category = "book" | "movie" | "series" | "other";
+
+
 export class Item{
     constructor(
         private _title: string,
-        private _category: string = "",
+        private _category: Category,
         private _imageUrl: string = "",
         private _userDescription: string = ""
         ) {

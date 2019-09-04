@@ -26,7 +26,7 @@ export class MainPanelComponent implements OnInit {
   }
 
   onAddItemToCurrentGroup() {
-    this.groupService.addItemToCurrentGroup(new Item("TEST ITEM"))
+    this.groupService.addItemToCurrentGroup(new Item("TEST ITEM", "movie"))
   }
 
 }

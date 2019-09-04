@@ -25,17 +25,18 @@ export class SidebarActionsComponent implements OnInit {
   }
 
   onAddItemToCurrentGroup() {
-    this.groupService.addItemToCurrentGroup(new Item("TEST ITEM"))
+    this.groupService.addItemToCurrentGroup(new Item("TEST ITEM", "movie"))
   }
 
   onAddItem() {
     const dialogRef = this.dialog.open(CreateItemDialogComponent, {
-      width: '500px'
+      width: '900px',
+      height: '600px'
     });
 
-    // Adding item to currentGroup works, but the form-input itself is buggy.
-    dialogRef.afterClosed().subscribe(item => {
-      console.log("Hello new item");
-    });
+    // dialogRef.afterClosed().subscribe(item => {
+    //   console.log("Hello new item", item);
+    // });
   }
+
 }
