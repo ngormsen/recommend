@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 // Angular components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,8 +12,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatSelectModule} from '@angular/material/select'; 
-import {MatRadioModule} from '@angular/material/radio'; 
+import { MatSelectModule } from '@angular/material/select'; 
+import { MatRadioModule } from '@angular/material/radio'; 
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -38,6 +39,8 @@ import { CreateItemDialogComponent } from './create-item-dialog/create-item-dial
 import { NavCategoryComponent } from './nav-category/nav-category.component';
 import { SidebarActionsComponent } from './sidebar-actions/sidebar-actions.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { LoginViewComponent } from './login-view/login-view.component';
+import { MainViewComponent } from './main-view/main-view.component';
 
 
 
@@ -54,7 +57,9 @@ import { LoginFormComponent } from './login-form/login-form.component';
     CreateItemDialogComponent,
     NavCategoryComponent,
     SidebarActionsComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    LoginViewComponent,
+    MainViewComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -73,7 +78,17 @@ import { LoginFormComponent } from './login-form/login-form.component';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase, 'recommendation-app'),
     AngularFirestoreModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        component: LoginViewComponent
+      },
+      {
+        path: 'main',
+        component: MainViewComponent
+      }
+    ])
   ],
   entryComponents: [CreateItemDialogComponent],
 
