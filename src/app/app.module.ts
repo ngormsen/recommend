@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-// Angular Material components
+// Angular components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar'; 
@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select'; 
 import {MatRadioModule} from '@angular/material/radio'; 
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 // Third party components
@@ -63,7 +63,8 @@ import { SidebarActionsComponent } from './sidebar-actions/sidebar-actions.compo
     MatInputModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    HttpClientModule
   ],
   entryComponents: [CreateItemDialogComponent],
 
