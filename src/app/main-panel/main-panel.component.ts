@@ -13,20 +13,18 @@ export class MainPanelComponent implements OnInit {
   currentGroup: Group;
   categories: string[];
 
-  constructor(private groupService: GroupService) {
+  constructor(private groupSvc: GroupService) {
     this.categories = CATEGORIES;
   }
 
   ngOnInit() {
-    // Subscribe to currentGroup of GroupService, such that the currentGroup
-    // attribute gets updated each time the value changes in the service.
-    this.groupService.currentGroup.subscribe((newGroup) => {
-      this.currentGroup = newGroup;
+    this.groupSvc.currentGroup$.subscribe(group => {
+      this.currentGroup = group;
     })
   }
 
   onAddItemToCurrentGroup() {
-    this.groupService.addItemToCurrentGroup(new Item("TEST ITEM", "movie"))
+    this.groupSvc.addItemToCurrentGroup(new Item("TEST ITEM", "movie"))
   }
 
 }

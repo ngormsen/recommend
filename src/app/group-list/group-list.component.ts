@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Group } from '../group.model';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { GroupService } from '../group.service';
-import { GROUPS } from '../MOCKDATA';
+import { Group } from '../group.model';
 
 @Component({
   selector: 'app-group-list',
@@ -9,24 +9,17 @@ import { GROUPS } from '../MOCKDATA';
   styleUrls: ['./group-list.component.scss']
 })
 export class GroupListComponent implements OnInit {
-  groups: Group[];
-  currentGroup: Group;
+  @Input() groups: Group[];
   
-  constructor(private groupService: GroupService) {
-    this.groupService.groups.subscribe((groups) => { 
-      return this.groups = groups;
-    })
-    
-    this.groupService.currentGroup.subscribe((newGroup) => {
-      this.currentGroup = newGroup;
-    })
+  constructor(private groupSvc: GroupService) {
+
   }
-  
   ngOnInit(): void {
   }
 
-  onSetCurrentGroup(group: Group) {
-    this.groupService.setCurrentGroup(group);
+  onSetCurrentGroup(group) {
+    console.log("Setting current group")
+    this.groupSvc.setCurrentGroup(group);
   }
 
 }
