@@ -17,8 +17,6 @@ export class ItemListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.currentCategory);
-    console.log(this.currentGroup)
   }
 
 }

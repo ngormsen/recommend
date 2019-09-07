@@ -14,14 +14,17 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select'; 
 import {MatRadioModule} from '@angular/material/radio'; 
 
-
+// firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
 
 // Third party components
 import { NgxFloatButtonModule } from 'ngx-float-button'; // source: https://github.com/GustavoCostaW/ngc-float-button
 
 // Local components
 import { AppComponent } from './app.component';
-import { GroupComponent } from './group/group.component';
 import { GroupListComponent } from './group-list/group-list.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { ItemComponent } from './item/item.component';
@@ -32,6 +35,7 @@ import { FloatingButtonComponent } from './floating-button/floating-button.compo
 import { CreateItemDialogComponent } from './create-item-dialog/create-item-dialog.component';
 import { NavCategoryComponent } from './nav-category/nav-category.component';
 import { SidebarActionsComponent } from './sidebar-actions/sidebar-actions.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 
 
@@ -39,7 +43,6 @@ import { SidebarActionsComponent } from './sidebar-actions/sidebar-actions.compo
   declarations: [
     AppComponent,
     TopBarComponent,
-    GroupComponent,
     GroupListComponent,
     ItemComponent,
     ItemListComponent,
@@ -48,7 +51,8 @@ import { SidebarActionsComponent } from './sidebar-actions/sidebar-actions.compo
     FloatingButtonComponent,
     CreateItemDialogComponent,
     NavCategoryComponent,
-    SidebarActionsComponent
+    SidebarActionsComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -63,7 +67,10 @@ import { SidebarActionsComponent } from './sidebar-actions/sidebar-actions.compo
     MatInputModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatRadioModule
+    MatRadioModule,
+    AngularFireModule.initializeApp(environment.firebase, 'recommendation-app'),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   entryComponents: [CreateItemDialogComponent],
 
