@@ -9,11 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-  isLoginProcedure: boolean = true;
-  isPasswordsIdentical: boolean = false;
-
   loginForm: FormGroup;
-  registerForm: FormGroup;
 
   constructor(
     private router: Router,
@@ -25,26 +21,17 @@ export class LoginFormComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      email: new FormControl(''),
-      password: new FormControl('')
-    })
-
-    this.registerForm = this.fb.group({
-      email: new FormControl(''),
-      password1: new FormControl(''),
-      password2: new FormControl('')
+      email: new FormControl('hello@world.com'),
+      password: new FormControl('helloworld')
     })
   }
 
   onSignInWithGoogle() {
     this._auth.signInWithGoogle();
-    this.router.navigate(['main'])
   }
   
   onSignInWithEmailAndPassword(email: string, password: string) {
-    console.log(email, password)
     this._auth.signInWithEmailAndPassword(email, password);
-    this.router.navigate(['main'])
   }
 
 }

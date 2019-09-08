@@ -34,7 +34,6 @@ export class RegisterFormComponent implements OnInit {
   onRegisterWithEmailAndPassword(email: string, password1: string, password2: string) {
     if (password1 === password2) {
       this._auth.registerWithEmailAndPassword(email, password1);
-      this.router.navigate(['main']);
     } else {
       this.isPasswordsIdentical$.next(false)
     }

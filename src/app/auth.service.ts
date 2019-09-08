@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class AuthService {
   constructor(
     private _afAuth: AngularFireAuth,
     private _afs: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) {
     this.user$ = this._afAuth.authState.pipe(
       switchMap(user => {
@@ -36,7 +38,7 @@ export class AuthService {
     var credential = await this._afAuth.auth.signInWithEmailAndPassword(email, password);
     console.log("You've successfully logged in with email+pw!")
     this.updateUserData(credential.user);
-    //this.router.navigate([...])
+    this.router.navigate(['main'])
   }
 
   async registerWithEmailAndPassword(email: string, password: string) {
@@ -46,7 +48,6 @@ export class AuthService {
 
   async sendEmailVerification() {
     await this._afAuth.auth.currentUser.sendEmailVerification()
-    //this.router.navigate([...])
   }
   
   async signInWithGoogle() {
@@ -54,7 +55,7 @@ export class AuthService {
     const credential = await this._afAuth.auth.signInWithPopup(provider);
     console.log("You've successfully logged in with email+pw!")
     this.updateUserData(credential.user);
-    // this.router.navigate([...])
+    this.router.navigate(['main'])
   }
 
   async signOut() {
@@ -63,19 +64,11 @@ export class AuthService {
     // this.router.navigate('home')
   }
 
-  private updateUserData({uid, email}) {
-    // note: 'uid' must be a field of a single user's firestore document!
-    const userRef: AngularFirestoreDocument<any> = this._afs.doc('users/${user.uid}');
-
-    // Create data that we want to save
-    const data = {
-      uid: uid,
-      email: email,
-    }
-
-    console.log(data)
-
-    // {merge: true}: Only updates data that has changed in the data-payload.
-    return userRef.set(data, { merge: true });
+  /** Load data that is needed for the logged-in user's start-up view */
+  private updateUserData(user) {
+    // TODO: Change <any> to <User> 
+    console.log("Logged-in user:", user)
+    const userRef = this._afs.doc('users/{user.uid}')
+    this.userService.setupUser(userRef)
   }
 }
