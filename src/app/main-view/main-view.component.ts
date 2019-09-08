@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-main-view',
@@ -7,15 +6,10 @@ import { UserService } from '../user.service';
   styleUrls: ['./main-view.component.scss']
 })
 export class MainViewComponent implements OnInit {
-  user;
 
-  constructor(private _userService: UserService) {
-  }
+  constructor() { }
 
   ngOnInit() {
-    this._userService.user$.subscribe(user => {
-      this.user = user;
-    })
   }
 
 }
