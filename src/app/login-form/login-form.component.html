@@ -1,16 +1,17 @@
-<form [formGroup]="loginForm" class="container d-flex flex-column">
+<form [formGroup]="loginForm" class="container d-flex flex-column" style="max-width: 400px">
     
-        <h4 class="h5">Anmeldung</h4>
+        <h4 class="h3">Anmeldung</h4>
         
         <mat-form-field>
             <input matInput placeholder="Email..." formControlName="email">
         </mat-form-field>
         
         <mat-form-field>
-            <input matInput placeholder="Password..." formControlName="password">
+            <input matInput type="password" placeholder="Password..." formControlName="password">
         </mat-form-field>
-
-        <button (click)="onSignInWithEmailAndPassword(loginForm.value.email, loginForm.value.password)">SignIn</button>
-        <button (click)="onSignInWithGoogle()">SignIn With Google</button>
-    
+        
+        <button mat-button class="bg-light my-1" (click)="onSignInWithEmailAndPassword(loginForm.value.email, loginForm.value.password)">SignIn</button>
+        <button mat-button class="bg-light my-1" (click)="onSignInWithGoogle()">SignIn With Google</button>
+        <button mat-button class="bg-light my-1" [routerLink]="['register']">Create Account</button>
 </form>
+

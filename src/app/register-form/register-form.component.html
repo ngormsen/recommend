@@ -1,0 +1,23 @@
+<form [formGroup]="registerForm" class="container d-flex flex-column" style="max-width: 400px">
+    <h4 class="h3">Create Account</h4>
+    
+    <mat-form-field>
+        <input matInput placeholder="Email..." formControlName="email">
+    </mat-form-field>
+    
+    <mat-form-field>
+        <input matInput type="password" placeholder="Password..." formControlName="password1">
+    </mat-form-field>
+    
+    <mat-form-field>
+        <input matInput type="password" placeholder="Repeat Password..." formControlName="password2">
+    </mat-form-field>
+
+    <div *ngIf="isPasswordsIdentical == false" class="bg-warning">
+        <p>The passwords entered did not match. Try again.</p>
+    </div>
+    
+    <button mat-button class="bg-light my-1" (click)="onRegisterWithEmailAndPassword(registerForm.value.email, registerForm.value.password1, registerForm.value.password2)">Registrieren</button>
+    <button mat-button class="bg-light my-1">I already have an Account</button>
+</form>
+

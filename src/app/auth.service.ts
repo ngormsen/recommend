@@ -39,7 +39,7 @@ export class AuthService {
     //this.router.navigate([...])
   }
 
-  async emailAndPasswordRegister(email: string, password: string) {
+  async registerWithEmailAndPassword(email: string, password: string) {
     var result = await this._afAuth.auth.createUserWithEmailAndPassword(email, password);
     // this.sendEmailVerification()
   }
@@ -63,7 +63,7 @@ export class AuthService {
     // this.router.navigate('home')
   }
 
-  private updateUserData({ uid, email}) {
+  private updateUserData({uid, email}) {
     // note: 'uid' must be a field of a single user's firestore document!
     const userRef: AngularFirestoreDocument<any> = this._afs.doc('users/${user.uid}');
 

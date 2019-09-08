@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 // Angular components
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -41,8 +41,14 @@ import { SidebarActionsComponent } from './sidebar-actions/sidebar-actions.compo
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LoginViewComponent } from './login-view/login-view.component';
 import { MainViewComponent } from './main-view/main-view.component';
+import { RegisterViewComponent } from './register-view/register-view.component';
+import { RegisterFormComponent } from './register-form/register-form.component';
 
-
+const routes: Routes = [
+  {path: '', component: LoginViewComponent},
+  {path: 'register', component: RegisterViewComponent},
+  {path: 'main', component: MainViewComponent}
+]
 
 @NgModule({
   declarations: [
@@ -59,7 +65,9 @@ import { MainViewComponent } from './main-view/main-view.component';
     SidebarActionsComponent,
     LoginFormComponent,
     LoginViewComponent,
-    MainViewComponent
+    MainViewComponent,
+    RegisterViewComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -79,16 +87,7 @@ import { MainViewComponent } from './main-view/main-view.component';
     AngularFireModule.initializeApp(environment.firebase, 'recommendation-app'),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: LoginViewComponent
-      },
-      {
-        path: 'main',
-        component: MainViewComponent
-      }
-    ])
+    RouterModule.forRoot(routes)
   ],
   entryComponents: [CreateItemDialogComponent],
 
