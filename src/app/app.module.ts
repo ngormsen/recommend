@@ -24,7 +24,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 // Third party components
-import { NgxFloatButtonModule } from 'ngx-float-button'; // source: https://github.com/GustavoCostaW/ngc-float-button
+import { QuillModule } from 'ngx-quill';
 
 // Local components
 import { AppComponent } from './app.component';
@@ -34,7 +34,6 @@ import { ItemComponent } from './item/item.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MainPanelComponent } from './main-panel/main-panel.component';
-import { FloatingButtonComponent } from './floating-button/floating-button.component';
 import { CreateItemDialogComponent } from './create-item-dialog/create-item-dialog.component';
 import { NavCategoryComponent } from './nav-category/nav-category.component';
 import { SidebarActionsComponent } from './sidebar-actions/sidebar-actions.component';
@@ -59,7 +58,6 @@ const routes: Routes = [
     ItemListComponent,
     SidebarComponent,
     MainPanelComponent,
-    FloatingButtonComponent,
     CreateItemDialogComponent,
     NavCategoryComponent,
     SidebarActionsComponent,
@@ -75,7 +73,6 @@ const routes: Routes = [
     MatButtonModule,
     MatToolbarModule,
     MatSidenavModule,
-    NgxFloatButtonModule,
     MatTabsModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -87,7 +84,16 @@ const routes: Routes = [
     AngularFireModule.initializeApp(environment.firebase, 'recommendation-app'),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    QuillModule.forRoot({
+      modules: {
+        syntax: false,
+        toolbar: [
+          ['bold', 'italic', 'underline'],
+          [{ 'list': 'bullet'}]
+        ]
+      }
+    })
   ],
   entryComponents: [CreateItemDialogComponent],
 

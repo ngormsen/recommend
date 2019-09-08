@@ -31,12 +31,8 @@ export class SidebarActionsComponent implements OnInit {
   onAddItem() {
     const dialogRef = this.dialog.open(CreateItemDialogComponent, {
       width: '900px',
-      height: '600px'
+      height: '800px'
     });
-
-    // dialogRef.afterClosed().subscribe(item => {
-    //   console.log("Hello new item", item);
-    // });
   }
 
 }

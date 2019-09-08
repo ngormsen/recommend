@@ -1,27 +1,33 @@
-<h2 mat-dialog-title>Empfehlung erstellen</h2>
-<mat-dialog-content>
+<mat-dialog-content class="container mx-auto" style="height:100%">
+
+  <h1 class="h3">New Recommendation</h1>
 
   <form [formGroup]="itemForm" class="d-flex flex-column">
     
-    Value: {{ itemForm.value | json }}
-    
-    <hr>
+    <mat-form-field>
+      <input matInput placeholder="What do you recommend?" formControlName="title">
+    </mat-form-field>
 
-    <mat-radio-group class="d-flex justify-content-around" aria-label="Select an option" formControlName="category">
-        <mat-radio-button value="book">Buch</mat-radio-button>
-        <mat-radio-button value="movie">Film</mat-radio-button>
-        <mat-radio-button value="series">Serie</mat-radio-button>
-        <mat-radio-button value="other">Andere</mat-radio-button>
+    
+    
+    <h1 class="h5 mb-2">Why do you recommend it?</h1>
+    <quill-editor
+      class="mb-4"
+      [styles]="{height: '250px'}" 
+      formControlName="userDescription">
+    </quill-editor>
+
+    <h1 class="h5">Give your recommendation a tag</h1>
+    <mat-radio-group 
+      class="d-flex flex-column ml-2" 
+      aria-label="Select an option" 
+      formControlName="category">
+      <mat-radio-button value="book">Buch</mat-radio-button>
+      <mat-radio-button value="movie">Film</mat-radio-button>
+      <mat-radio-button value="series">Serie</mat-radio-button>
+      <mat-radio-button value="other">Andere</mat-radio-button>
     </mat-radio-group>
-    
-    <mat-form-field>
-      <input matInput placeholder="Titel" formControlName="title">
-    </mat-form-field>
-    
-    <mat-form-field>
-      <textarea matInput placeholder="Warum empfiehlst du diesen Titel?" formControlName="userDescription"></textarea> 
-    </mat-form-field>
-
+  
   </form>
 
   <div mat-dialog-actions>
