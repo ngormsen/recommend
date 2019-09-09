@@ -23,6 +23,7 @@ export class AuthService {
     private router: Router,
     private userService: UserService
   ) {
+    // TODO: Wird dieser snippet überhaupt benötigt?! Der kommt ausm fire..-video
     this.user$ = this._afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
@@ -36,14 +37,19 @@ export class AuthService {
 
   async signInWithEmailAndPassword(email: string, password: string) {
     var credential = await this._afAuth.auth.signInWithEmailAndPassword(email, password);
-    console.log("You've successfully logged in with email+pw!")
     this.updateUserData(credential.user);
-    this.router.navigate(['main'])
   }
 
   async registerWithEmailAndPassword(email: string, password: string) {
-    var result = await this._afAuth.auth.createUserWithEmailAndPassword(email, password);
-    // this.sendEmailVerification()
+    const credential = await this._afAuth.auth.createUserWithEmailAndPassword(email, password);
+    
+    // Create a document for the user in firestore with document-ID == uid
+    const user = credential.user
+    const data = {uid: user.uid, email: user.email}
+    this._afs.collection('users').doc(user.uid).set(data);
+    
+    // After successful registration, redirect the user to his main-view
+    this.updateUserData(user);
   }
 
   async sendEmailVerification() {
@@ -53,22 +59,33 @@ export class AuthService {
   async signInWithGoogle() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this._afAuth.auth.signInWithPopup(provider);
-    console.log("You've successfully logged in with email+pw!")
-    this.updateUserData(credential.user);
-    this.router.navigate(['main'])
+    const user = credential.user;
+
+    // How to we catch first-time signIns, s.t. we can create a
+    // user-document with the respective userId in Firestore?
+    this._afs.doc('users/${user.uid}').get().subscribe(doc => {
+      if (doc.exists) {
+        this.updateUserData(user);
+      } else {
+        // Create a document for the (new) user in firestore with document-ID == uid
+        const data = { uid: user.uid, email: user.email };
+        this._afs.collection('users').doc(user.uid).set(data);
+        this.updateUserData(user);
+      }
+    })
   }
 
   async signOut() {
     await this._afAuth.auth.signOut();
     // localStorage.removeItem('user');
-    // this.router.navigate('home')
+    this.router.navigate([''])
   }
 
   /** Load data that is needed for the logged-in user's start-up view */
   private updateUserData(user) {
     // TODO: Change <any> to <User> 
     console.log("Logged-in user:", user)
-    const userRef = this._afs.doc('users/{user.uid}')
-    this.userService.setupUser(userRef)
+    this.userService.setupUser(user.uid)
+    this.router.navigate(['main'])
   }
 }
