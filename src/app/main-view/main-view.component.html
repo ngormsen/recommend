@@ -1,0 +1,18 @@
+<div class="app-container shadow-lg">
+  <app-top-bar *ngIf="user" [userEmail]="user.getEmail()"></app-top-bar>
+        
+  <mat-drawer-container class="example-container">
+      <!-- Sidebar Panel -->
+      <mat-drawer mode="side" opened>
+        <app-sidebar></app-sidebar>
+      </mat-drawer>
+  
+      <!-- Main Panel -->
+      <mat-drawer-content class="bg-light">
+        <app-main-panel></app-main-panel>
+      </mat-drawer-content>
+  
+  </mat-drawer-container>
+</div>
+          
+      
