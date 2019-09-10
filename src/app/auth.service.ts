@@ -13,9 +13,6 @@ import { UserService } from './user.service';
   providedIn: 'root'
 })
 export class AuthService {
-  // Observable of the user document from Firestore
-  user$: Observable<User>;
-
 
   constructor(
     private _afAuth: AngularFireAuth,
@@ -23,16 +20,6 @@ export class AuthService {
     private router: Router,
     private userService: UserService
   ) {
-    // TODO: Wird dieser snippet überhaupt benötigt?! Der kommt ausm fire..-video
-    this.user$ = this._afAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
-          return this._afs.doc('users/${user.uid}').valueChanges();
-        } else {
-          return of(null);
-        }
-      })
-    )
   }
 
   async signInWithEmailAndPassword(email: string, password: string) {
