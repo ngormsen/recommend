@@ -42,6 +42,7 @@ import { LoginViewComponent } from './login-view/login-view.component';
 import { MainViewComponent } from './main-view/main-view.component';
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { RegisterFormComponent } from './register-form/register-form.component';
+import { CreateNewGroupDialogComponent } from './create-new-group-dialog/create-new-group-dialog.component';
 
 const routes: Routes = [
   {path: '', component: LoginViewComponent},
@@ -65,7 +66,8 @@ const routes: Routes = [
     LoginViewComponent,
     MainViewComponent,
     RegisterViewComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    CreateNewGroupDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -96,7 +98,10 @@ const routes: Routes = [
       }
     })
   ],
-  entryComponents: [CreateItemDialogComponent],
+  entryComponents: [
+    CreateItemDialogComponent,
+     CreateNewGroupDialogComponent
+  ],
 
   providers: [],
   bootstrap: [AppComponent]

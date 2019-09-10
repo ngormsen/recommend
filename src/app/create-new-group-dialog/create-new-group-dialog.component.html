@@ -1,0 +1,27 @@
+<mat-dialog-content class="container mx-auto pb-5" style="height: 100%">
+    
+    <h1 class="h3">Create a New Group</h1>
+    
+    <form [formGroup]="groupForm">
+        <input matInput placeholder="What's the name of the group?" formControlName="groupName">
+        
+        <h1 class="h5">Do you want a public or private group? (You can always change this later)</h1>
+        
+        <mat-radio-group
+            class="d-flex flex-column ml-2"
+            aria-label="Public or Private?"
+            formControlName="privacySetting">
+            <mat-radio-button  value="private">Private</mat-radio-button>
+            <mat-radio-button  value="public">Public</mat-radio-button>
+        </mat-radio-group>
+    
+    </form>
+    
+    <div mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button mat-button
+                mat-dialog-close
+                (click)="onSubmitGroup(groupForm.value.groupName, groupForm.value.privacySetting)">Create Group</button>
+    </div>
+
+</mat-dialog-content>>
