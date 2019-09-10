@@ -33,8 +33,22 @@ export class UserService {
     // Retrieve items for main-page (infinite scroll?)
   }
 
+  addGroup(group: Group) {
+    // Deconstruct group-object s.t. it can be saved as document data
+    const newGroup = {
+      name: group.getName()
+    }
+    this._afb.collection('users').doc(this._uid).collection('groups').add(newGroup)
+  }
+
   addItem(item: Item) {
-    // Deconstruct Item's data s.t. it can be saved as document data
-    this._afb.collection('users/${this._uid}/items').add(item); 
+    // Deconstruct Item-object s.t. it can be saved as document data
+    const newItem = {
+      title: item.getTitle(),
+      category: item.getCategory(),
+      imgUrl: item.getImageUrl(),
+      userDescription: item.getUserDescription()
+    }
+    this._afb.collection('users/${this._uid}/items').add(newItem); 
   }
 }
