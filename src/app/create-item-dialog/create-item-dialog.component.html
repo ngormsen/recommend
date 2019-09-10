@@ -34,7 +34,7 @@
     <button mat-button mat-dialog-close>Abbrechen</button>
     <button mat-button 
             mat-dialog-close
-            (click)="onAddItemToCurrentGroup(itemForm.value.title, itemForm.value.category, itemForm.value.userDescription)"
+            (click)="onSubmitItem(itemForm.value.title, itemForm.value.category, itemForm.value.userDescription)"
             cdkFocusInitial>Bestätigen
     </button>
   </div>

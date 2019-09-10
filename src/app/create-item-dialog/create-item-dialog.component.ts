@@ -26,10 +26,9 @@ export class CreateItemDialogComponent implements OnInit {
       userDescription: new FormControl('')
     })
 
-    // this.itemForm.valueChanges.subscribe(console.log)
   }
   // TODO Add default group
-  onAddItemToCurrentGroup(title: string, category: Category, userDescription: string) {    
+  onSubmitItem(title: string, category: Category, userDescription: string) {    
     let newItem = new Item(title, category, "", userDescription)
     this.groupService.addItemToCurrentGroup(newItem)
   }

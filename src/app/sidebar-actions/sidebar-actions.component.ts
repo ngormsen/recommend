@@ -4,6 +4,7 @@ import { Group } from '../group.model';
 import { Item } from '../item.model';
 import { MatDialog } from '@angular/material';
 import { CreateItemDialogComponent } from '../create-item-dialog/create-item-dialog.component';
+import { CreateNewGroupDialogComponent } from '../create-new-group-dialog/create-new-group-dialog.component';
 
 @Component({
   selector: 'app-sidebar-actions',
@@ -32,6 +33,13 @@ export class SidebarActionsComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateItemDialogComponent, {
       width: '900px',
       height: '800px'
+    });
+  }
+
+  onCreateNewGroup() {
+    const dialogRef = this.dialog.open(CreateNewGroupDialogComponent, {
+      maxWidth: '100vw',
+      maxHeight: '100vh'
     });
   }
 
