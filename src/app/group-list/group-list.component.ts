@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { GroupService } from '../group.service';
 import { Group } from '../group.model';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-group-list',
@@ -10,16 +9,19 @@ import { Group } from '../group.model';
 })
 export class GroupListComponent implements OnInit {
   @Input() groups: Group[];
-  
-  constructor(private groupSvc: GroupService) {
+  testVar;
 
+  constructor(private userService: UserService) {
+    this.userService.groups$.subscribe(groups => {
+      // was du damit machst ist beliebig
+      this.testVar = groups;
+    })
   }
+
   ngOnInit(): void {
   }
 
-  onSetCurrentGroup(group) {
-    console.log("Setting current group")
-    this.groupSvc.setCurrentGroup(group);
+  onSetCurrentGroup() {
   }
 
 }
