@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'recommend';
-  private _url: string = "https://api.diffbot.com/v3/product?token=7939f6f8dec8b7df65018695868ddbd2&url=https://www.amazon.com/gp/video/detail/B072LP3L59/ref=atv_mv_hom_1_c_D4dtpS_2_1";
+  private _url: string = 'http://www.omdbapi.com/?apikey=b192c98a&s=batman'
   constructor(private http: HttpClient) {
     this.getData() 
    }

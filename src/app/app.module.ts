@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select'; 
 import { MatRadioModule } from '@angular/material/radio'; 
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatAutocompleteModule } from '@angular/material';
 
 // firebase
 import { AngularFireModule } from '@angular/fire';
@@ -77,6 +77,7 @@ const routes: Routes = [
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatAutocompleteModule,
     ReactiveFormsModule,
     MatSelectModule,
     MatRadioModule,
