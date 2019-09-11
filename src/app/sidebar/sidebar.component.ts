@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupService } from '../group.service';
 import { Group } from '../group.model';
+import { UserService } from '../user.service'
 
 @Component({
   selector: 'app-sidebar',
@@ -10,9 +10,9 @@ import { Group } from '../group.model';
 export class SidebarComponent implements OnInit {
   groups: Group[] = [];
 
-  constructor(private groupSvc: GroupService) { 
-
-    this.groupSvc.groups$.subscribe(groups => {
+  constructor(private userService: UserService) { 
+    
+    this.userService.groups$.subscribe(groups => {
       this.groups = groups;
     })
   }
