@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AmazonService } from './amazon.service';
+import { ApiProductService } from './api-product.service';
 
-describe('AmazonService', () => {
+describe('ApiProductService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AmazonService = TestBed.get(AmazonService);
+    const service: ApiProductService = TestBed.get(ApiProductService);
     expect(service).toBeTruthy();
   });
 });

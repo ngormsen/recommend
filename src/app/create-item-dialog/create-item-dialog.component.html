@@ -8,8 +8,8 @@
      <input matInput placeholder="What do you recommend?" formControlName="title" [matAutocomplete]="auto">
      <!-- <input matInput type="text" placeholder="Pick one" aria-label="Number" [formControl]="myControl" [matAutocomplete]="auto"> -->
         <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let option of options" [value]="option">
-            {{option}}
+          <mat-option *ngFor="let autoCompleteOption of autoCompleteOptions" [value]="autoCompleteOption">
+            {{autoCompleteOption}}
           </mat-option>
         </mat-autocomplete>
     

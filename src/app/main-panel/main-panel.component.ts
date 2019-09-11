@@ -3,7 +3,7 @@ import { GroupService } from '../group.service';
 import { Group } from '../group.model';
 import { Item } from '../item.model';
 import { CATEGORIES } from '../MOCKDATA';
-import { AmazonService } from '../amazon.service';
+
 @Component({
   selector: 'app-main-panel',
   templateUrl: './main-panel.component.html',

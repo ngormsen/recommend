@@ -9,6 +9,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
+import { ApiProductService } from '../api-product.service';
 
 @Component({
   selector: 'app-create-item-dialog',
@@ -21,36 +22,25 @@ export class CreateItemDialogComponent implements OnInit {
   // String of the form http://www.omdbapi.com/?apikey=b192c98a&s=batman
   private _url: string = '';
   // Create string with options for autocomplete
-  options: string[] = []
+  autoCompleteOptions: string[] = []
 
   constructor(
+    private productApi : ApiProductService,
     private http: HttpClient,
     private groupService: GroupService,
     private fb: FormBuilder, 
     public dialogRef: MatDialogRef<CreateItemDialogComponent>) {
-  }
-
-  private _changeOptions(options) : void{
-    this.options = options
-  }
-
-  // TODO Create service for api calls
-  private _retrieveMovieData(value){
-    let options : string[] = [];
-    this._url = `http://www.omdbapi.com/?apikey=b192c98a&s=${value}`
-    this.http.get(this._url).subscribe(results =>{
-      if(results['Response'] != "False"){
-          for(let result in results['Search']){
-            options.push(results['Search'][result].Title);
-            
-          }
-          // TODO subscribe/return the value 
-          this._changeOptions(options)
-      }
-    })  
+      productApi.movieData$.subscribe(data => console.log(data));
   }
 
   ngOnInit() {
+    // Subscribe to movieData$ from Product API Service
+    this.productApi.movieData$.subscribe(movieData => {
+      // Set autoCompleteOptions to movie data result
+      this.autoCompleteOptions = movieData;
+    });
+
+    // Set up form control group
     this.itemForm = this.fb.group({
       category: new FormControl(''),
       title: new FormControl(''),
@@ -58,9 +48,10 @@ export class CreateItemDialogComponent implements OnInit {
     })
 
     // Subscribe to changes on title FormControl
-    this.itemForm.get('title').valueChanges.subscribe(value => 
+    this.itemForm.get('title').valueChanges.subscribe(title => 
       {
-        this._retrieveMovieData(value);
+        // Get movie data from service
+         this.productApi.fetchMovieData(title);
       })
 
   }
