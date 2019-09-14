@@ -23,11 +23,10 @@ export class UserService {
   
   constructor(private _afb: AngularFirestore) {
     this.currGroup$.subscribe(currGroup => {
-      if (this.isAppStart !== true) {
+      if (!this.isAppStart) {
         // I have to get the groupId and then
         // retrieve items that correspond to this group id
-        const currGroupId = "retrieve group id somehow"
-  
+        const currGroupId = currGroup.getGroupId();
         const itemsRef = this._afb.collection('items').ref;
   
         itemsRef.where('groupId', '==', currGroupId).get()
@@ -49,7 +48,6 @@ export class UserService {
   }
   
   setupUser(uid: string): void {
-    
     // Retrieve user data from user's firebase-user-document
     this._afb.collection('users').doc(uid)
       .valueChanges()
@@ -58,21 +56,6 @@ export class UserService {
       })
     
     // // Retrieve the user's subcollection 'groups' to display group-list
-    // this._afb.collection('users').doc(uid).collection('groups')
-    //   .valueChanges()
-    //   .subscribe(groups => {
-    //     let groupObjects = groups.map(({name}) => {
-    //       return new Group (name);
-    //     });
-
-    //     this.groups = groupObjects;
-
-    //     if (this.isAppStart === true) {
-    //       this.currGroup$.next(groupObjects[0]); 
-    //       this.isAppStart = false;
-    //     };
-    //   })
-
     this._afb.collection('users').doc(uid).collection('groups')
       .snapshotChanges()
       .pipe(
@@ -89,6 +72,12 @@ export class UserService {
           return new Group (id, name);
         })
         console.log(this.groups);
+
+        if (this.isAppStart === true) {
+          this.currGroup$.next(this.groups[0]);
+          this.isAppStart = false;
+        };
+        console.log('currentGroup:', this.currGroup$.value)
       })
   } 
 
