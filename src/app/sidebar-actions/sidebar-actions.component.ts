@@ -15,14 +15,14 @@ export class SidebarActionsComponent implements OnInit {
   currentGroup: Group;
 
   constructor(private groupService: GroupService, public dialog: MatDialog) {
-  }
-
-  ngOnInit() {
     // Subscribe to currentGroup of GroupService, such that the currentGroup
     // attribute gets updated each time the value changes in the service.
     this.groupService.currentGroup$.subscribe((newGroup) => {
       this.currentGroup = newGroup;
-    })
+    });
+  }
+
+  ngOnInit() {
   }
 
   onAddItemToCurrentGroup() {

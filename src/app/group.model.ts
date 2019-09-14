@@ -1,14 +1,20 @@
 import { Item } from './item.model'
 
 export class Group {
+    private _items: Item[] = [];
+
     constructor(
-        private _name: string,
-        private _items: Item[] = []) { 
+        private _groupId: string,
+        private _name: string) { 
     };
 
     getName(): string {
         return this._name;
     }; 
+
+    getGroupId(): string {
+        return this._groupId;
+    }
     
     addItem(item: Item): void {
         this._items.push(item);

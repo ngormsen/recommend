@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Item } from './item.model';
 import { Group } from './group.model';
-import { isNull } from 'util';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,74 +14,94 @@ import { isNull } from 'util';
 // * Muss der Observable eine Variable sein?
 
 export class UserService {
-  private _uid: string;
-
-  user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
-  groups$: BehaviorSubject<Group[]> = new BehaviorSubject<Group[]>([]);
-  items$: BehaviorSubject<Item[]> = new BehaviorSubject<Item[]>(null);
-  currentGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
+  
+  user: User;
+  groups: Group[];
+  currGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
+  currItems: Item[];
   isAppStart = true;
   
   constructor(private _afb: AngularFirestore) {
-    this.user$.subscribe(x => {
-      console.log("user$: ", x)
-    })
-
-    this.groups$.subscribe(x => {
-      console.log("groups$: ", x)
-    })
-
-    this.currentGroup$.subscribe(x => {
-      console.log("currentGroup$: ", x)
+    this.currGroup$.subscribe(currGroup => {
+      if (this.isAppStart !== true) {
+        // I have to get the groupId and then
+        // retrieve items that correspond to this group id
+        const currGroupId = "retrieve group id somehow"
+  
+        const itemsRef = this._afb.collection('items').ref;
+  
+        itemsRef.where('groupId', '==', currGroupId).get()
+          .then(snapshot => {
+            if (snapshot.empty) {
+              console.log("No matching documents");
+              return;
+            }
+  
+            snapshot.forEach(doc => {
+              console.log(doc.id, '=>', doc.data());
+            });
+          })
+          .catch(err => {
+            console.log('Error getting documents', err);
+          });
+      }
     })
   }
   
   setupUser(uid: string): void {
-    this._uid = uid;
     
-    // Retrieve data from user's firebase-user-document
+    // Retrieve user data from user's firebase-user-document
     this._afb.collection('users').doc(uid)
       .valueChanges()
       .subscribe(({email, uid}) => {
-
-        // Add user observable
-        let user = new User ("defaultName", uid, email);
-        this.user$.next(user);
-        console.log("value change trigger", email, uid)
-        // this.groups$.next(user)
-        
+        this.user = new User ("defaultName", uid, email);
       })
+    
+    // // Retrieve the user's subcollection 'groups' to display group-list
+    // this._afb.collection('users').doc(uid).collection('groups')
+    //   .valueChanges()
+    //   .subscribe(groups => {
+    //     let groupObjects = groups.map(({name}) => {
+    //       return new Group (name);
+    //     });
 
-      this._afb.collection('users').doc(uid).collection('groups')
-        .valueChanges()
-        .subscribe(groups => {
-          let groupObjects = groups.map(({name}) => {
-            return new Group (name);
+    //     this.groups = groupObjects;
+
+    //     if (this.isAppStart === true) {
+    //       this.currGroup$.next(groupObjects[0]); 
+    //       this.isAppStart = false;
+    //     };
+    //   })
+
+    this._afb.collection('users').doc(uid).collection('groups')
+      .snapshotChanges()
+      .pipe(
+        map(changes => {
+          return changes.map(change => {
+            const data = change.payload.doc.data();
+            const id = change.payload.doc.id;
+            return {id, ...data};
           })
-
-          this.groups$.next(groupObjects);
-
-          if (this.isAppStart === true) {
-            this.currentGroup$.next(groupObjects[0])
-            this.isAppStart = false;
-          }
         })
+      )
+      .subscribe(changes => {
+        this.groups = changes.map(({id, name}) => {
+          return new Group (id, name);
+        })
+        console.log(this.groups);
+      })
   } 
 
   addGroup(group: Group) {
-    this.currentGroup$.next(group);
+    this.currGroup$.next(group);
     
     // Deconstruct group-object s.t. it can be saved as document data
     const newGroup = {
       name: group.getName()
     }
     
-    
     // Add group to firebase
-    this._afb.collection('users').doc(this._uid).collection('groups').add(newGroup)
-
-    // Update groups$ s.t. the new group is displayed in the sidepanel
-    console.log("new groups array: ", this.groups$.value.push(group))
+    this._afb.collection('users').doc(this.user.getUserId()).collection('groups').add(newGroup)
   }
 
   addItem(item: Item) {
@@ -91,7 +111,8 @@ export class UserService {
       category: item.getCategory(),
       imgUrl: item.getImageUrl(),
       userDescription: item.getUserDescription()
-    }
-    this._afb.collection(`users/${this._uid}/items`).add(newItem); 
+    };
+
+    this._afb.collection(`users/${this.user.getUserId()}/items`).add(newItem);
   }
 }

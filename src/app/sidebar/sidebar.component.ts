@@ -11,10 +11,7 @@ export class SidebarComponent implements OnInit {
   groups: Group[] = [];
 
   constructor(private userService: UserService) { 
-    
-    this.userService.groups$.subscribe(groups => {
-      this.groups = groups;
-    })
+    this.groups = this.userService.groups;
   }
 
   ngOnInit() {

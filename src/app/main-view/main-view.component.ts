@@ -11,12 +11,10 @@ export class MainViewComponent implements OnInit {
   user: User;
 
   constructor(private _userService: UserService) {
+    this.user = this._userService.user;
   }
 
   ngOnInit() {
-    this._userService.user$.subscribe(user => {
-      this.user = user;
-    })
   }
 
 }
