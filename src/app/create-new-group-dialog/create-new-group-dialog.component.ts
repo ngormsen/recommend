@@ -25,16 +25,14 @@ export class CreateNewGroupDialogComponent implements OnInit {
     })
   }
 
-  onSubmitGroup(groupName: string, privacySetting: string) {
-    console.log("onSubmitGroup getriggert.", groupName, privacySetting)
-    if (privacySetting === "private") {
-      const isPrivate = true;
-    } else {
-      const isPrivate = false
-    }
+  onSubmitGroup(groupName: string, privacySetting: string): void {
+    console.log("onSubmitGroup getriggert.", groupName, privacySetting);
 
-    let newGroup = new Group (groupName)
-    this.userService.addGroup(newGroup);
+    if (privacySetting === "private") {
+      this.userService.addGroup(groupName, true);
+    } else {
+      this.userService.addGroup(groupName, false);
+    }
   }
 
 }

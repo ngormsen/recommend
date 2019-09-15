@@ -10,9 +10,6 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 
-// Fragen
-// * Muss der Observable eine Variable sein?
-
 export class UserService {
   
   user: User;
@@ -22,10 +19,12 @@ export class UserService {
   isAppStart = true;
   
   constructor(private _afb: AngularFirestore) {
+    // At each change of the current group, we retrieve its items
+    // from the data base. That is exactly why current group
+    // must be an observable -- we have to trigger something when 
+    // current group changes. 
     this.currGroup$.subscribe(currGroup => {
-      if (!this.isAppStart) {
-        // I have to get the groupId and then
-        // retrieve items that correspond to this group id
+      if (!this.isAppStart) { // <--- TODO: Look for more elegant solution.
         const currGroupId = currGroup.getGroupId();
         const itemsRef = this._afb.collection('items').ref;
   
@@ -55,7 +54,7 @@ export class UserService {
         this.user = new User ("defaultName", uid, email);
       })
     
-    // // Retrieve the user's subcollection 'groups' to display group-list
+    // Retrieve the user's subcollection 'groups' to display group-list
     this._afb.collection('users').doc(uid).collection('groups')
       .snapshotChanges()
       .pipe(
@@ -68,29 +67,31 @@ export class UserService {
         })
       )
       .subscribe(changes => {
-        this.groups = changes.map(({id, name}) => {
-          return new Group (id, name);
+        this.groups = changes.map(({id, name, isPrivate}) => {
+          return new Group (id, name, isPrivate);
         })
         console.log(this.groups);
 
         if (this.isAppStart === true) {
           this.currGroup$.next(this.groups[0]);
           this.isAppStart = false;
+          console.log('currentGroup:', this.currGroup$.value)
         };
-        console.log('currentGroup:', this.currGroup$.value)
       })
   } 
 
-  addGroup(group: Group) {
-    this.currGroup$.next(group);
+  addGroup(groupName: string, isPrivate: boolean) {
+    const docId = this._afb.createId();
     
-    // Deconstruct group-object s.t. it can be saved as document data
-    const newGroup = {
-      name: group.getName()
-    }
-    
-    // Add group to firebase
-    this._afb.collection('users').doc(this.user.getUserId()).collection('groups').add(newGroup)
+    // this.groups.push(new Group (docId, groupName, isPrivate));
+
+    const data = {
+      groupId: docId,
+      name: groupName,
+      isPrivate: isPrivate
+    };
+
+    this._afb.collection('users').doc(this.user.getUserId()).collection('groups').doc(docId).set(data);
   }
 
   addItem(item: Item) {
