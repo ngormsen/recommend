@@ -11,8 +11,7 @@ export class ItemComponent implements OnInit {
   @Input() currentCategory: string;
 
   constructor() {
-
-   }
+  }
 
   ngOnInit() {
   }

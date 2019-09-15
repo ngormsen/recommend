@@ -1,4 +1,4 @@
-<div *ngIf="(item.getCategory() == currentCategory.toLowerCase()) || currentCategory.toLowerCase() == 'all'" class="item-container d-flex mx-auto my-5 p-3 bg-white shadow-lg">
+<!-- <div *ngIf="(item.getCategory() == currentCategory.toLowerCase()) || currentCategory.toLowerCase() == 'all'" class="item-container d-flex mx-auto my-5 p-3 bg-white shadow-lg">
     <img [src]="item.getImageUrl()" class="img-thumbnail">
     <div class="px-4 d-flex flex-column">
         <h1 class="h3">{{ item.getTitle() }}</h1>
@@ -8,5 +8,14 @@
             <div class="fill-remaining-vertical-space"></div>
             <button mat-button class="text-primary">MORE</button>
         </div>
+    </div>
+</div> -->
+
+<div class="item-container d-flex mx-auto my-5 p-3 bg-white shadow-lg">
+    <img [src]="item.getImageUrl()" class="img-thumbnail">
+
+    <div class="px-4 d-flex flex-column">
+            <h1 class="h3">{{ item.getTitle() }}</h1>
+            <p>{{ item.getUserDescription() }}</p>
     </div>
 </div>

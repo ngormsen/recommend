@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { User } from '../user.model';
+import { Item } from '../item.model';
 
 @Component({
   selector: 'app-main-view',
@@ -8,13 +9,13 @@ import { User } from '../user.model';
   styleUrls: ['./main-view.component.scss']
 })
 export class MainViewComponent implements OnInit {
-  user: User;
+  items: Item[];
 
   constructor(private _userService: UserService) {
-    this.user = this._userService.user;
   }
-
+  
   ngOnInit() {
+    this._userService.currItems$.subscribe(items => this.items = items);
   }
 
 }

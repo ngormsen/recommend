@@ -34,10 +34,13 @@ export class UserService {
               console.log("No matching documents");
               return;
             }
-  
-            snapshot.forEach(doc => {
-              console.log(doc.id, '=>', doc.data());
-            });
+            
+            const items = snapshot.docs.map(doc => {
+              const {title, category, userDescription} = doc.data();
+              return new Item (title, category, "imageUrl", userDescription);
+            })
+
+            this.currItems$.next(items);
           })
           .catch(err => {
             console.log('Error getting documents', err);
@@ -82,6 +85,10 @@ export class UserService {
       })
   } 
 
+  setCurrentGroup(group: Group) {
+    this.currGroup$.next(group);
+  }
+
   addGroup(groupName: string, isPrivate: boolean) {
     const groupId = this._afb.createId();
     const currUserId = this.user$.value.getUserId();
@@ -106,5 +113,23 @@ export class UserService {
     
     const currUserId = this.user$.value.getUserId();
     this._afb.collection(`users/${currUserId}/items`).add(newItem);
+  }
+
+  addItemToCurrGroup(title: string, category: string, userDescription: string): void {
+    // get current group's groupId.
+    // save the item with the corresponding groupId as an attribute.
+    const currGroupId = this.currGroup$.value.getGroupId();
+    const itemData = {
+      groupId: currGroupId,
+      title: title,
+      category: category,
+      userDescription: userDescription
+    };
+
+    this._afb.collection('items')
+      .add(itemData)
+      .then(ref => {
+        console.log('Added item-document with ID:', ref.id);
+      })
   }
 }

@@ -1,7 +1,6 @@
-<h4 *ngIf="currentGroup">Current group: {{ currentGroup.getName() }}</h4>
 <mat-tab-group mat-align-tabs="center" animationDuration="0ms">
     <mat-tab *ngFor="let category of categories" label="{{category | titlecase}}" #tabLabel>
-        <app-item-list [currentGroup]="currentGroup" [currentCategory]="tabLabel.textLabel"></app-item-list>
+        <app-item-list [items]="items" [currentCategory]="tabLabel.textLabel"></app-item-list>
     </mat-tab>
 </mat-tab-group>
 

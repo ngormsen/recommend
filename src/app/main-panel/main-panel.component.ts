@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GroupService } from '../group.service';
 import { Group } from '../group.model';
 import { Item } from '../item.model';
 import { CATEGORIES } from '../MOCKDATA';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-main-panel',
@@ -10,21 +11,14 @@ import { CATEGORIES } from '../MOCKDATA';
   styleUrls: ['./main-panel.component.scss']
 })
 export class MainPanelComponent implements OnInit {
-  currentGroup: Group;
+  @Input() items: Item[];
   categories: string[];
 
-  constructor(private groupSvc: GroupService) {
+  constructor() {
     this.categories = CATEGORIES;
   }
 
   ngOnInit() {
-    this.groupSvc.currentGroup$.subscribe(group => {
-      this.currentGroup = group;
-    })
-  }
-
-  onAddItemToCurrentGroup() {
-    this.groupSvc.addItemToCurrentGroup(new Item("TEST ITEM", "movie"))
   }
 
 }

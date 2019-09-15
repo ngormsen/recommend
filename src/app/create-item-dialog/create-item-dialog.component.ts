@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Item, Category } from '../item.model';
 import { GroupService } from '../group.service';
 import { ApiProductService, IMovieApi } from '../api-product.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-create-item-dialog',
@@ -18,7 +19,7 @@ export class CreateItemDialogComponent implements OnInit {
 
   constructor(
     private productApi : ApiProductService,
-    private groupService: GroupService,
+    private userService: UserService,
     private fb: FormBuilder
     ){};
   
@@ -29,7 +30,7 @@ export class CreateItemDialogComponent implements OnInit {
       this.autoCompleteOptions = movieData;
     });
 
-    // Set up form control group
+    // Setup name-value pairs that are retrieved from the form
     this.itemForm = this.fb.group({
       category: new FormControl(''),
       title: new FormControl(''),
@@ -44,10 +45,9 @@ export class CreateItemDialogComponent implements OnInit {
       })
 
   }
-  // TODO Add default group
-  onSubmitItem(title: string, category: Category, userDescription: string) {    
-    let newItem = new Item(title, category, "", userDescription)
-    this.groupService.addItemToCurrentGroup(newItem)
+
+  onSubmitItem(title: string, category: Category, userDescription: string): void {
+    this.userService.addItemToCurrGroup(title, category, userDescription);
   }
 
 
