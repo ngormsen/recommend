@@ -10,13 +10,17 @@ import { UserService } from '../user.service';
 export class GroupListComponent implements OnInit {
   @Input() groups: Group[];
 
-  constructor(private userService: UserService) {
+  constructor() {
   }
-
+  
   ngOnInit(): void {
   }
 
   onSetCurrentGroup() {
+  }
+
+  consoleLogGroups() {
+    console.log("@Input() groups:", this.groups);
   }
 
 }

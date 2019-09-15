@@ -11,12 +11,12 @@ import { map } from 'rxjs/operators';
 })
 
 export class UserService {
-  
-  user: User;
-  groups: Group[];
-  currGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
-  currItems: Item[];
   isAppStart = true;
+  
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  groups$: BehaviorSubject<Group[]> = new BehaviorSubject<Group[]>(null);
+  currGroup$: BehaviorSubject<Group> = new BehaviorSubject<Group>(null);
+  currItems$: BehaviorSubject<Item[]> = new BehaviorSubject<Item[]>(null);
   
   constructor(private _afb: AngularFirestore) {
     // At each change of the current group, we retrieve its items
@@ -51,7 +51,8 @@ export class UserService {
     this._afb.collection('users').doc(uid)
       .valueChanges()
       .subscribe(({email, uid}) => {
-        this.user = new User ("defaultName", uid, email);
+        const newUser = new User ("defaultName", uid, email);
+        this.user$.next(newUser);
       })
     
     // Retrieve the user's subcollection 'groups' to display group-list
@@ -67,13 +68,14 @@ export class UserService {
         })
       )
       .subscribe(changes => {
-        this.groups = changes.map(({id, name, isPrivate}) => {
+        const groups = changes.map(({id, name, isPrivate}) => {
           return new Group (id, name, isPrivate);
-        })
-        console.log(this.groups);
+        });
+
+        this.groups$.next(groups);
 
         if (this.isAppStart === true) {
-          this.currGroup$.next(this.groups[0]);
+          this.currGroup$.next(groups[0]);
           this.isAppStart = false;
           console.log('currentGroup:', this.currGroup$.value)
         };
@@ -81,17 +83,16 @@ export class UserService {
   } 
 
   addGroup(groupName: string, isPrivate: boolean) {
-    const docId = this._afb.createId();
+    const groupId = this._afb.createId();
+    const currUserId = this.user$.value.getUserId();
     
-    // this.groups.push(new Group (docId, groupName, isPrivate));
-
     const data = {
-      groupId: docId,
+      groupId: groupId,
       name: groupName,
       isPrivate: isPrivate
     };
 
-    this._afb.collection('users').doc(this.user.getUserId()).collection('groups').doc(docId).set(data);
+    this._afb.collection('users').doc(currUserId).collection('groups').doc(groupId).set(data);
   }
 
   addItem(item: Item) {
@@ -102,7 +103,8 @@ export class UserService {
       imgUrl: item.getImageUrl(),
       userDescription: item.getUserDescription()
     };
-
-    this._afb.collection(`users/${this.user.getUserId()}/items`).add(newItem);
+    
+    const currUserId = this.user$.value.getUserId();
+    this._afb.collection(`users/${currUserId}/items`).add(newItem);
   }
 }

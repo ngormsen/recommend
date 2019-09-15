@@ -1,5 +1,6 @@
 <h1 class="h5">Meine Gruppen</h1>
 <ul class="list-unstyled">
+    <button (click)="consoleLogGroups()">Console Log groups</button>
     <li *ngFor="let group of groups">
         <button 
                 class="btn btn-link text-primary"

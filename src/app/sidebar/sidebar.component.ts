@@ -8,12 +8,14 @@ import { UserService } from '../user.service'
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  groups: Group[] = [];
+  groups: Group[];
 
   constructor(private userService: UserService) { 
-    this.groups = this.userService.groups;
+    this.userService.groups$.subscribe(groups => {
+      this.groups = groups;
+    });
   }
-
+  
   ngOnInit() {
   }
 
